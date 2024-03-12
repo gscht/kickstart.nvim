@@ -24,10 +24,10 @@ end
 
 local home = os.getenv 'HOME'
 
-local workspace_path = home .. '/ws/jdtls_data/'
+local workspace_path = home .. '/ws/jdtls_data_2/'
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_dir = workspace_path .. project_name
-os.execute('mkdir ' .. workspace_dir)
+--os.execute('mkdir ' .. workspace_dir)
 
 local java_debug_adapter_path = vim.fn.glob(mason_path .. '/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar')
 local bundles = {
