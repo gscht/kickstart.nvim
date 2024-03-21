@@ -545,7 +545,10 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
-        jdtls = {},
+        jdtls = {
+          cmd = require('custom.java_config').cmd,
+          capabilities = {},
+        },
 
         lua_ls = {
           -- cmd = {...},
