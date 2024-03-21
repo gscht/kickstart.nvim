@@ -23,7 +23,6 @@ if root_dir == '' then
 end
 
 local home = os.getenv 'HOME'
-
 local workspace_path = home .. '/ws/jdtls_data_2/'
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_dir = workspace_path .. project_name
@@ -136,8 +135,8 @@ local config = {
     bundles = bundles,
   },
 }
-require("jdtls").setup_dap { hotcodereplace = "auto" }
-require("jdtls.dap").setup_dap_main_class_configs()
+require('jdtls').setup_dap { hotcodereplace = 'auto' }
+require('jdtls.dap').setup_dap_main_class_configs()
 require('jdtls').start_or_attach(config)
 vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()"
 
