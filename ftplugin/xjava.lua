@@ -136,7 +136,10 @@ local config = {
     bundles = bundles,
   },
 }
+require("jdtls").setup_dap { hotcodereplace = "auto" }
+require("jdtls.dap").setup_dap_main_class_configs()
 require('jdtls').start_or_attach(config)
+vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()"
 
 -- Shorten function name
 local keymap = vim.keymap.set
