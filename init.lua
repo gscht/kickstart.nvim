@@ -191,6 +191,8 @@ vim.keymap.set('n', '<C-Down>', ':resize -2<CR>', { desc = 'Resize down' })
 vim.keymap.set('n', '<C-Right>', ':vertical resize -2<CR>', { desc = 'Resize right' })
 vim.keymap.set('n', '<C-Left>', ':vertical resize +2<CR>', { desc = 'Resize left' })
 
+vim.keymap.set('n', '<leader>k', ':LazyGit<cr>', { noremap = true, silent = true, desc = 'Open LazyGit' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
