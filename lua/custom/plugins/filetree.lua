@@ -20,7 +20,7 @@ end
 return {
   'nvim-tree/nvim-tree.lua',
   config = function()
-    require('nvim-tree').setup() {
+    require('nvim-tree').setup {
       respect_buf_cwd = true,
       reload_on_bufenter = true,
       on_attach = on_attach,
