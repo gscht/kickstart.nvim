@@ -12,6 +12,10 @@ local workspace_path = home .. '/ws/jdtls_data_2/'
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_dir = workspace_path .. project_name
 
+local _, jdtls = pcall(require, 'jdtls')
+local extendedClientCapabilities = jdtls.extendedClientCapabilities
+extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+
 java_config.cmd = {
   'java',
   '-Declipse.application=org.eclipse.jdt.ls.core.id1',
@@ -33,5 +37,57 @@ java_config.cmd = {
   '-data',
   workspace_dir,
 }
+
+java_config.settings = {
+  java = {
+    eclipse = {
+      downloadSources = true,
+    },
+    configuration = {
+      updateBuildConfiguration = 'interactive',
+    },
+    maven = {
+      downloadSources = true,
+    },
+    implementationsCodeLens = {
+      enabled = false,
+    },
+    referencesCodeLens = {
+      enabled = false,
+    },
+    references = {
+      includeDecompiledSources = true,
+    },
+    -- Set this to true to use jdtls as your formatter
+    format = {
+      enabled = false,
+    },
+  },
+  signatureHelp = { enabled = true },
+  completion = {
+    favoriteStaticMembers = {
+      'org.assertj.core.api.Assertions.*',
+      'java.util.Objects.requireNonNull',
+      'java.util.Objects.requireNonNullElse',
+      'org.mockito.Mockito.*',
+    },
+  },
+  contentProvider = { preferred = 'fernflower' },
+  extendedClientCapabilities = extendedClientCapabilities,
+  sources = {
+    organizeImports = {
+      starThreshold = 9999,
+      staticStarThreshold = 9999,
+    },
+  },
+  codeGeneration = {
+    toString = {
+      template = '${object.className}{${member.name()}=${member.value}, ${otherMembers}}',
+    },
+    useBlocks = true,
+  },
+}
+
+java_config.capabilities = extendedClientCapabilities
 
 return java_config
