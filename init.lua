@@ -264,6 +264,49 @@ require('lazy').setup({
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
+      on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
+        -- Navigation
+        map('n', '<leader>gj', function()
+          if vim.wo.diff then
+            return '<leader>gj'
+          end
+          vim.schedule(function()
+            gs.next_hunk()
+          end)
+          return '<Ignore>'
+        end, { expr = true, desc = 'Goto next hunk' })
+
+        map('n', '<leader>gk', function()
+          if vim.wo.diff then
+            return '<laeder>gk'
+          end
+          vim.schedule(function()
+            gs.prev_hunk()
+          end)
+          return '<Ignore>'
+        end, { expr = true, desc = 'Goto prev hunk' })
+
+        -- Actions
+        map('n', '<leader>gr', gs.reset_hunk, { desc = 'Reset hunk' })
+        map('v', '<leader>gs', function()
+          gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        end, { desc = 'Stage hunk' })
+        map('n', '<leader>gR', gs.reset_buffer, { desc = 'Reset buffer' })
+        map('n', '<leader>gp', gs.preview_hunk, { desc = 'Reset hunk' })
+        map('n', '<leader>gb', function()
+          gs.blame_line { full = true }
+        end, { desc = 'Blame line' })
+        map('n', '<leader>gD', function()
+          gs.diffthis '~'
+        end, { desc = 'Diff this' })
+      end,
       signs = {
         add = { text = '+' },
         change = { text = '~' },
@@ -302,6 +345,7 @@ require('lazy').setup({
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+        ['<leader>g'] = { name = '[G]itsigns', _ = 'which_key_ignore' },
       }
     end,
   },
@@ -674,6 +718,7 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
 
       -- If you want to add a bunch of pre-configured snippets,
       --    you can use this plugin to help you. It even has snippets
@@ -738,6 +783,7 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = 'buffer', keyword_length = 3 },
         },
       }
     end,
