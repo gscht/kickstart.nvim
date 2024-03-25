@@ -613,7 +613,15 @@ require('lazy').setup({
           settings = require('custom.java_config').settings,
           capabilities = require('custom.java_config').capabilities,
         },
-
+        yamlls = {
+          settings = {
+            yaml = {
+              schemas = {
+                ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
+              },
+            },
+          },
+        },
         lua_ls = {
           -- cmd = {...},
           -- filetypes { ...},
