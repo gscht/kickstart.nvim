@@ -612,6 +612,8 @@ require('lazy').setup({
           cmd = require('custom.java_config').cmd,
           settings = require('custom.java_config').settings,
           capabilities = require('custom.java_config').capabilities,
+          init_options = require('custom.java_config').init_options,
+          on_attach = require('custom.java_config').on_attach,
         },
         yamlls = {
           settings = {
@@ -891,7 +893,7 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`

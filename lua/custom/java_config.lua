@@ -16,6 +16,13 @@ local _, jdtls = pcall(require, 'jdtls')
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
+local java_debug_adapter_path = vim.fn.glob(mason_path .. '/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar')
+local java_test_server_paths = vim.fn.glob(mason_path .. '/java-test/extension/server/*.jar')
+local bundles = {
+  java_debug_adapter_path,
+}
+vim.list_extend(bundles, vim.split(java_test_server_paths, '\n'))
+
 java_config.cmd = {
   'java',
   '-Declipse.application=org.eclipse.jdt.ls.core.id1',
@@ -89,5 +96,15 @@ java_config.settings = {
 }
 
 java_config.capabilities = extendedClientCapabilities
+
+java_config.init_options = {
+  bundles = bundles,
+}
+
+java_config.on_attach = function(client, _)
+  print('Attaching ' .. client.name)
+  require('jdtls').setup_dap { hotcodereplace = 'auto' }
+  require('jdtls.dap').setup_dap_main_class_configs()
+end
 
 return java_config
