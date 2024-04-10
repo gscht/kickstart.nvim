@@ -103,7 +103,7 @@ java_config.init_options = {
 
 java_config.on_attach = function(client, _)
   print('Attaching ' .. client.name)
-  require('jdtls').setup_dap { hotcodereplace = 'auto' }
+  require('jdtls').setup_dap { hotcodereplace = 'auto', config_overrides = {} }
   require('jdtls.dap').setup_dap_main_class_configs()
 end
 
