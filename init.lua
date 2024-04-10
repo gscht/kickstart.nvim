@@ -206,6 +206,10 @@ vim.keymap.set('v', '<leader>y', '"+y', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>y', '"+y', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>Y', 'gg"+yG', { noremap = true, silent = true })
 
+-- Move to next and prev in quickfix list
+vim.keymap.set('n', 'öj', '<cmd>:cnext<cr>zz', { desc = 'Move to next in quickfix list' })
+vim.keymap.set('n', 'öl', '<cmd>:cprev<cr>zz', { desc = 'Move to prev in quickfix list' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -412,7 +416,15 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          live_grep = {
+            --theme = "dropdown",
+            max_results = 5,
+            additional_args = function(_)
+              return { '--hidden' }
+            end,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -508,10 +520,6 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
-          -- NOTE: Remember that lua is a real programming language, and as such it is possible
-          -- to define small helper and utility functions so you don't have to repeat yourself
-          -- many times.
-          --
           -- In this case, we create a function that lets us more easily define mappings specific
           -- for LSP related items. It sets the mode, buffer and description for us each time.
           local map = function(keys, func, desc)
@@ -558,6 +566,10 @@ require('lazy').setup({
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+          -- Java specific mappings
+          --map('<leader>tm', require('jdtls').test_nearest_method(), '[T]est nearest [m]ethod')
+          --map('<leader>tc', require('jdtls').test_class(), '[T]est [c]lass')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -647,6 +659,18 @@ require('lazy').setup({
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+        -- lemminx settings is not working yet.
+        lemminx = {
+          settings = {
+            xml = {
+              format = {
+                enabled = false,
+                insertSpaces = true,
+                tabSize = 2,
+              },
             },
           },
         },
