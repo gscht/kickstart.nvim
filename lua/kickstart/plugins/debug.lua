@@ -7,9 +7,7 @@
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
@@ -41,6 +39,7 @@ return {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
       },
+      automatic_installation = false,
     }
 
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -71,6 +70,34 @@ return {
           run_last = '▶▶',
           terminate = '⏹',
           disconnect = '⏏',
+        },
+      },
+      layouts = {
+        {
+          elements = {
+            { id = 'scopes', size = 0.5 },
+            { id = 'watches', size = 0.2 },
+            { id = 'stacks', size = 0.2 },
+            { id = 'breakpoints', size = 0.1 },
+          },
+          size = 60,
+          position = 'right',
+        },
+        {
+          elements = {
+            { id = 'repl', size = 0.3 },
+            { id = 'console', size = 0.7 },
+          },
+          size = 13,
+          position = 'bottom',
+        },
+      },
+      floating = {
+        max_height = nil, -- These can be integers or a float between 0 and 1.
+        max_width = nil, -- Floats will be treated as percentage of your screen.
+        border = 'single', -- Border style. Can be "single", "double" or "rounded"
+        mappings = {
+          close = { 'q', '<Esc>' },
         },
       },
     }
