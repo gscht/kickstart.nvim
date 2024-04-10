@@ -101,10 +101,23 @@ java_config.init_options = {
   bundles = bundles,
 }
 
-java_config.on_attach = function(client, _)
+java_config.on_attach = function(client, bufnr)
   print('Attaching ' .. client.name)
   require('jdtls').setup_dap { hotcodereplace = 'auto', config_overrides = {} }
   require('jdtls.dap').setup_dap_main_class_configs()
+
+  local function buf_set_keymap(...)
+    vim.api.nvim_buf_set_keymap(bufnr, ...)
+  end
+
+  -- Mappings.
+  local opts = { noremap = true, silent = true }
+  buf_set_keymap('n', '<leader>tc', "<Cmd>lua require'jdtls'.test_class()<CR>", opts)
+  buf_set_keymap('n', '<leader>tm', "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", opts)
+  buf_set_keymap('n', '<leader>ju', "<Cmd>lua require('jdtls').update_project_config()<CR>", opts)
+  buf_set_keymap('v', '<leader>cv', "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
+  buf_set_keymap('n', '<leader>cv', "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
+  buf_set_keymap('v', '<leader>cm', "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
 end
 
 return java_config
