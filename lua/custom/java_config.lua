@@ -109,15 +109,14 @@ java_config.on_attach = function(client, bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
-
   -- Mappings.
-  local opts = { noremap = true, silent = true }
   buf_set_keymap('n', '<leader>tc', "<Cmd>lua require'jdtls'.test_class()<CR>", { desc = '[T]est [c]lass' })
   buf_set_keymap('n', '<leader>tm', "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", { desc = '[T]est [m]ethod' })
   buf_set_keymap('n', '<leader>ju', "<Cmd>lua require('jdtls').update_project_config()<CR>", { desc = '[J]ava [u]pdate' })
   buf_set_keymap('v', '<leader>cv', "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", { desc = '[C]ode extract [v]ariable' })
   buf_set_keymap('n', '<leader>cv', "<Cmd>lua require('jdtls').extract_variable()<CR>", { desc = '[C]ode extract [v]ariable' })
   buf_set_keymap('v', '<leader>cm', "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", { desc = '[C]ode extract [m]ethod' })
+  buf_set_keymap('n', '<leader>ct', "<cmd>lua require('custom.functions').create_test_case()<cr>", { desc = '[C]reate [t]est case' })
   buf_set_keymap('n', '<F5>', "<Cmd>lua require('jdtls.dap').setup_dap_main_class_configs()<CR>", { desc = 'Update main classes for debug' })
 end
 
