@@ -134,7 +134,7 @@ vim.keymap.set('n', '<leader>Y', 'gg"+yG', { noremap = true, silent = true })
 
 -- Move to next and prev in quickfix list
 vim.keymap.set('n', 'öj', '<cmd>:cnext<cr>zz', { desc = 'Move to next in quickfix list' })
-vim.keymap.set('n', 'öl', '<cmd>:cprev<cr>zz', { desc = 'Move to prev in quickfix list' })
+vim.keymap.set('n', 'ök', '<cmd>:cprev<cr>zz', { desc = 'Move to prev in quickfix list' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
