@@ -101,6 +101,10 @@ java_config.init_options = {
   bundles = bundles,
 }
 
+java_config.root_dir = function()
+  return vim.fs.root(0, { 'mvnw', '.git' })
+end
+
 java_config.on_attach = function(client, bufnr)
   print('Attaching ' .. client.name)
   require('jdtls').setup_dap { hotcodereplace = 'auto', config_overrides = {} }

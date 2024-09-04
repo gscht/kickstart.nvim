@@ -553,6 +553,7 @@ require('lazy').setup({
           capabilities = require('custom.java_config').capabilities,
           init_options = require('custom.java_config').init_options,
           on_attach = require('custom.java_config').on_attach,
+          root_dir = require('custom.java_config').root_dir,
         },
         yamlls = {
           settings = {
