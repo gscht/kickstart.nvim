@@ -8,7 +8,7 @@ local path_to_jar = vim.fn.glob(path_to_plugins .. 'org.eclipse.equinox.launcher
 local lombok_path = jdtls_path .. '/lombok.jar'
 
 local home = os.getenv 'HOME'
-local workspace_path = home .. '/ws/jdtls_data_2/'
+local workspace_path = home .. '/ws/jdtls_data_3/'
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_dir = workspace_path .. project_name
 
@@ -69,29 +69,17 @@ java_config.settings = {
     format = {
       enabled = false,
     },
-  },
-  signatureHelp = { enabled = true },
-  completion = {
-    favoriteStaticMembers = {
-      'org.assertj.core.api.Assertions.*',
-      'java.util.Objects.requireNonNull',
-      'java.util.Objects.requireNonNullElse',
-      'org.mockito.Mockito.*',
+    signatureHelp = { enabled = true },
+    completion = {
+      enabled = true,
+      favoriteStaticMembers = {
+        'org.assertj.core.api.Assertions.*',
+        'java.util.Objects.requireNonNull',
+        'java.util.Objects.requireNonNullElse',
+        'org.mockito.Mockito.*',
+      },
     },
-  },
-  contentProvider = { preferred = 'fernflower' },
-  extendedClientCapabilities = extendedClientCapabilities,
-  sources = {
-    organizeImports = {
-      starThreshold = 9999,
-      staticStarThreshold = 9999,
-    },
-  },
-  codeGeneration = {
-    toString = {
-      template = '${object.className}{${member.name()}=${member.value}, ${otherMembers}}',
-    },
-    useBlocks = true,
+    contentProvider = { preferred = 'fernflower' },
   },
 }
 
