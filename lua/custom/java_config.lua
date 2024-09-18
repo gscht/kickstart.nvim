@@ -1,5 +1,4 @@
 local java_config = {}
-
 local mason_path = vim.fn.stdpath 'data' .. '/mason/packages'
 local jdtls_path = mason_path .. '/jdtls'
 local path_to_lsp_server = jdtls_path .. '/config_mac'
@@ -83,10 +82,22 @@ java_config.settings = {
   },
 }
 
-java_config.capabilities = extendedClientCapabilities
+java_config.capabilities = {
+  workspace = {
+    configuration = true,
+  },
+  textDocument = {
+    completion = {
+      completionItem = {
+        snippetSupport = true,
+      },
+    },
+  },
+}
 
 java_config.init_options = {
   bundles = bundles,
+  extendedClientCapabilities = extendedClientCapabilities,
 }
 
 java_config.root_dir = function()

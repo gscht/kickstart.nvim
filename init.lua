@@ -547,14 +547,6 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
-        jdtls = {
-          cmd = require('custom.java_config').cmd,
-          settings = require('custom.java_config').settings,
-          capabilities = require('custom.java_config').capabilities,
-          init_options = require('custom.java_config').init_options,
-          on_attach = require('custom.java_config').on_attach,
-          root_dir = require('custom.java_config').root_dir,
-        },
         yamlls = {
           settings = {
             yaml = {
@@ -617,18 +609,24 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format lua code
+        'java-debug-adapter',
+        'java-test',
+        'google-java-format',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for tsserver)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            if server_name ~= 'jdtls' then
+              local server = servers[server_name] or {}
+              -- This handles overriding only values explicitly passed
+              -- by the server configuration above. Useful when disabling
+              -- certain features of an LSP (for example, turning off formatting for tsserver)
+              server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+              print('Language Server started: ' .. server_name)
+              require('lspconfig')[server_name].setup(server)
+            end
           end,
         },
       }
