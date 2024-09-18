@@ -103,9 +103,7 @@ function M.setup()
     extendedClientCapabilities = extendedClientCapabilities,
   }
 
-  java_config.root_dir = function()
-    return vim.fs.root(0, { 'mvnw', '.git' })
-  end
+  java_config.root_dir = vim.fs.root(0, { 'mvnw', '.git' })
 
   java_config.on_attach = function(client, bufnr)
     require('jdtls').setup_dap { hotcodereplace = 'auto', config_overrides = {} }
