@@ -1,7 +1,6 @@
 local M = {}
 
 function M.setup()
-  print 'In setup()'
   local java_config = {}
   local mason_path = vim.fn.stdpath 'data' .. '/mason/packages'
   local jdtls_path = mason_path .. '/jdtls'
@@ -109,7 +108,6 @@ function M.setup()
   end
 
   java_config.on_attach = function(client, bufnr)
-    print('Attaching ' .. client.name)
     require('jdtls').setup_dap { hotcodereplace = 'auto', config_overrides = {} }
     require('jdtls.dap').setup_dap_main_class_configs()
 
@@ -126,14 +124,10 @@ function M.setup()
     buf_set_keymap('n', '<leader>ct', "<cmd>lua require('custom.functions').create_test_case()<cr>", { desc = '[C]reate [t]est case' })
     buf_set_keymap('n', '<F5>', "<Cmd>lua require('jdtls.dap').setup_dap_main_class_configs()<CR>", { desc = 'Update main classes for debug' })
   end
-  print 'Setting up jdtls'
   jdtls.start_or_attach(java_config)
-  print 'After start_or_attach()'
 end
 
-print 'Before setup()'
 M.setup()
-print 'After setup()'
 
 vim.opt_local.shiftwidth = 2
 vim.opt_local.tabstop = 2
