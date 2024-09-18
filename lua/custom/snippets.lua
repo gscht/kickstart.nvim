@@ -1,6 +1,6 @@
 local ls = require 'luasnip'
 --local types = require "luasnip.util.types"
-local s = ls.s
+local s = ls.snippet
 local fmt = require('luasnip.extras.fmt').fmta
 local i = ls.insert_node
 local rep = require('luasnip.extras').rep
