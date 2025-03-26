@@ -136,6 +136,9 @@ vim.keymap.set('n', '<leader>Y', 'gg"+yG', { noremap = true, silent = true })
 vim.keymap.set('n', 'öj', '<cmd>:cnext<cr>zz', { desc = 'Move to next in quickfix list' })
 vim.keymap.set('n', 'ök', '<cmd>:cprev<cr>zz', { desc = 'Move to prev in quickfix list' })
 
+-- Format JSON
+vim.keymap.set('n', '<Leader>fj', '<Cmd>%!jq<CR>', { noremap = true, silent = true })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
