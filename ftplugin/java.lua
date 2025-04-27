@@ -4,7 +4,7 @@ function M.setup()
   local java_config = {}
   local mason_path = vim.fn.stdpath 'data' .. '/mason/packages'
   local jdtls_path = mason_path .. '/jdtls'
-  local path_to_lsp_server = jdtls_path .. '/config_mac'
+  local path_to_lsp_server = jdtls_path .. '/config_mac_arm'
   local path_to_plugins = jdtls_path .. '/plugins/'
   local path_to_jar = vim.fn.glob(path_to_plugins .. 'org.eclipse.equinox.launcher_*.jar')
   local lombok_path = jdtls_path .. '/lombok.jar'
