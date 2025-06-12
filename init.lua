@@ -118,7 +118,7 @@ vim.keymap.set('n', '<C-Right>', ':vertical resize -2<CR>', { desc = 'Resize rig
 vim.keymap.set('n', '<C-Left>', ':vertical resize +2<CR>', { desc = 'Resize left' })
 
 vim.keymap.set('n', '<leader>k', ':LazyGit<cr>', { noremap = true, silent = true, desc = 'Open LazyGit' })
-vim.keymap.set('n', '<leader>a', ':NvimTreeToggle<cr>', { noremap = true, silent = true, desc = 'Toggle NvimTree' })
+vim.keymap.set('n', '<leader>tt', ':NvimTreeToggle<cr>', { noremap = true, silent = true, desc = 'Toggle NvimTree' })
 vim.keymap.set('n', '<C-n>', ':NvimTreeFindFile<cr>:NvimTreeFocus<cr>', { noremap = true, silent = true, desc = 'Find file in NvimTree' })
 
 -- Stay in indent mode
@@ -582,6 +582,9 @@ require('lazy').setup({
               },
               completion = {
                 callSnippet = 'Replace',
+              },
+              diagnostics = {
+                globals = { 'vim' },
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
