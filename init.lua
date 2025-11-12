@@ -119,7 +119,7 @@ vim.keymap.set('n', '<C-Left>', ':vertical resize +2<CR>', { desc = 'Resize left
 
 vim.keymap.set('n', '<leader>k', ':LazyGit<cr>', { noremap = true, silent = true, desc = 'Open LazyGit' })
 vim.keymap.set('n', '<leader>tt', ':NvimTreeToggle<cr>', { noremap = true, silent = true, desc = 'Toggle NvimTree' })
-vim.keymap.set('n', '<leader>tr', ':NvimTreeToggle<cr>', { noremap = true, silent = true, desc = 'Refresh NvimTree' })
+vim.keymap.set('n', '<leader>tr', ':NvimTreeRefresh<cr>', { noremap = true, silent = true, desc = 'Refresh NvimTree' })
 vim.keymap.set('n', '<C-n>', ':NvimTreeFindFile<cr>:NvimTreeFocus<cr>', { noremap = true, silent = true, desc = 'Find file in NvimTree' })
 
 -- Stay in indent mode
