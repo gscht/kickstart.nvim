@@ -65,7 +65,7 @@ function M.setup()
         enabled = false,
       },
       references = {
-        includeDecompiledSources = true,
+        includeDecompiledSources = false,
       },
       -- Set this to true to use jdtls as your formatter
       format = {
@@ -81,7 +81,7 @@ function M.setup()
           'org.mockito.Mockito.*',
         },
       },
-      contentProvider = { preferred = 'fernflower' },
+      contentProvider = {},
     },
   }
 
