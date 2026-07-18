@@ -20,10 +20,28 @@ function M.setup()
 
   local java_debug_adapter_path = vim.fn.glob(mason_path .. '/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar')
   local java_test_server_paths = vim.fn.glob(mason_path .. '/java-test/extension/server/*.jar')
+
   local bundles = {
     java_debug_adapter_path,
   }
-  vim.list_extend(bundles, vim.split(java_test_server_paths, '\n'))
+
+  local excluded = {
+    'com%.microsoft%.java%.test%.runner%-jar%-with%-dependencies%.jar$',
+    'jacocoagent%.jar$',
+  }
+
+  for _, jar in ipairs(vim.split(java_test_server_paths, '\n')) do
+    local skip = false
+    for _, pattern in ipairs(excluded) do
+      if jar:match(pattern) then
+        skip = true
+        break
+      end
+    end
+    if not skip and jar ~= '' then
+      table.insert(bundles, jar)
+    end
+  end
 
   java_config.cmd = {
     'java',
